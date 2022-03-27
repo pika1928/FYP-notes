@@ -1,0 +1,16 @@
+{
+  "legacyEditor": false,
+  "livePreview": true,
+  "foldHeading": true,
+  "foldIndent": true,
+  "spellcheck": true,
+  "alwaysUpdateLinks": true,
+  "trashOption": "local",
+  "lineWrap": true,
+  "readableLineLength": true,
+  "showUnsupportedFiles": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "MotorControl",
+  "attachmentFolderPath": "./",
+  "strictLineBreaks": false
+}
