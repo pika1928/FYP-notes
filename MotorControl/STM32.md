@@ -55,8 +55,59 @@ In the while `loop`:
 
 ### Timers as counters
 [Digi-Key youtube tutorial on stm32 Timers and Timer-Interrupts](https://youtu.be/VfbW6nfG4kw)
-Timer Pre-scalers just divide the CPU Clock `HCLK` by an amount
+#### Pre-scalers
+Timer Pre-scalers just divide the CPU Clock `HCLK` by an amount (NB in STM32CubeIDE prescaler is 0-indexed)
 ![[mcu-timer-prescalers.png]]
 Check the chip datasheet to see what timers are available and their functions, eg for the stm32f446 in the nucleo-f446re: 
 ! [[stm32f446re_datasheet.pdf#page=30]]
 
+#### [[HAL]] clock
+In Pinout & Configuration, **System Core > SYS**, `Timebase Source` determines which clock is used for HAL functions (such as `HAL_Delay()`). 
+
+#### Timer hardware functions
+In Pinout & Configuration, **Timers > TIMX**, `Channel`s can be activated and configured in various modes:
+- ==Input Capture== mode stores the clock value when an even happens on a specified pin.
+- ==Output Compare== toggles a pin whenever the timer reaches a certain value. 
+- ==PWM Generation== toggles a pin with a specified duty cycle based on the timers value. 
+_These modes are carried out in hardware, therefore do not tax the CPU._
+
+#### Reading the timer value
+In `main()` CubeIDE will have initialised the timer, but it must still be started:
+```C
+MX_TIMXX_Init();             // initialise timer
+HAL_TIM_Base_Start(&htimXX); // start timer
+```
+the value of the timer can then be read with
+```C
+timer_value = __HAL_TIM_GET_COUNTER(&htimXX);
+```
+
+#### Triggering an interrupt 
+In Pinout & Configuration, **Timers > TIMX > Configuration > Parameter Settings**, `Counter Period` sets the value the timer counts to. 
+Along with `Prescaler`, this allows the timer to be set to count a specific amount of time. 
+
+For interrupts to work, in **Timers > TIMX > Configuration > NVIC Settings**, the `update and global interrupt` flag must be ==enabled==. 
+
+In `main()` CubeIDE will have initialised the timer, but it must still be started *with interrupts*:
+```C
+MX_TIMXX_Init();                // initialise timer
+HAL_TIM_Base_Start_IT(&htimXX); // start timer with interrupt
+```
+
+The stm32-HAL functions pertaining to timer interrupts can be found in the stm32 HAL documentation for a given MCU series, eg for the stm32f4 line:
+! [[stm32f4-hal-and-ll-drivers-documentation.pdf#page=995]]
+
+These call-back functions can be implemented in `main.c`:
+```C
+/* USER CODE BEGIN 4 */
+
+// Callback function for when timer resets
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	// Check which timer reset and triggered this callback
+	if (htim == &htimXX)
+	{
+		// code to run when timerXX elapses goes here
+	}
+}
+```

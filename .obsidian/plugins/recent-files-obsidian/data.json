@@ -1,6 +1,26 @@
 {
   "recentFiles": [
     {
+      "basename": "FOC",
+      "path": "MotorControl/FOC.md"
+    },
+    {
+      "basename": "foc-PI-control-of-d-and-q-components",
+      "path": "MotorControl/foc-PI-control-of-d-and-q-components.png"
+    },
+    {
+      "basename": "HAL",
+      "path": "MotorControl/HAL.md"
+    },
+    {
+      "basename": "2022-03-24",
+      "path": "Dailys/2022-03-24.md"
+    },
+    {
+      "basename": "2022-03-28",
+      "path": "Dailys/2022-03-28.md"
+    },
+    {
       "basename": "STM32",
       "path": "MotorControl/STM32.md"
     },
@@ -17,14 +37,6 @@
       "path": "Dailys/2022-03-25.md"
     },
     {
-      "basename": "HAL",
-      "path": "MotorControl/HAL.md"
-    },
-    {
-      "basename": "FOC",
-      "path": "MotorControl/FOC.md"
-    },
-    {
       "basename": "FreeRTOS",
       "path": "MotorControl/FreeRTOS.md"
     },
@@ -35,10 +47,6 @@
     {
       "basename": "stm32-read-adc-pinout&configuration",
       "path": "MotorControl/stm32-read-adc-pinout&configuration.png"
-    },
-    {
-      "basename": "2022-03-24",
-      "path": "Dailys/2022-03-24.md"
     },
     {
       "basename": "Daily template",

@@ -6,7 +6,7 @@ This removes the CPU bottleneck and allows for much faster continuous data strea
 
 ## [[stm32]]-HAL implementation
 [Digi-Key youtube tutorial on stm32 ADCs with DMA](https://youtu.be/EsZLgqhqfO0)
-In  the System Core category, enable DMA. 
+In  the ==System Core== category, enable DMA. 
 Add a `request` for the peripheral from which to stream data (eg ADC1), 
 use Normal or Circular `Mode` to fill or loop-over the destination memory:
 ![[stm32-dma-configuration.png]]
