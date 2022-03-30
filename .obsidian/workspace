@@ -45,6 +45,18 @@
         "state": {
           "type": "markdown",
           "state": {
+            "file": "Dailys/2022-03-29.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      },
+      {
+        "id": "5a47efc9feee5587",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
             "file": "MotorControl/FOC.md",
             "mode": "source",
             "source": false
@@ -208,17 +220,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "5f66999fb9ee76cf",
+  "active": "5a47efc9feee5587",
   "lastOpenFiles": [
     "MotorControl/FOC.md",
+    "MotorControl/foc-svm-basic-vector-abc-components.png",
+    "Dailys/2022-03-29.md",
+    "Dailys/2022-03-28.md",
+    "MotorControl/Double Buffer (Ping-pong Buffer).md",
     "MotorControl/foc-PI-control-of-d-and-q-components.png",
     "MotorControl/foc-PI-control-of-d-and-q-components.png",
     "MotorControl/HAL.md",
     "Dailys/2022-03-24.md",
-    "Dailys/2022-03-28.md",
-    "MotorControl/STM32.md",
-    "MotorControl/DMA.md",
-    "MotorControl/stm32f446re_datasheet.pdf",
-    "Dailys/2022-03-25.md"
+    "MotorControl/STM32.md"
   ]
 }

@@ -35,7 +35,7 @@ In `main()`, the DMA can be initiated for ADC -> MEM with the stm32-HAL:
 ```C
 HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_dma_buf, ADC_DMA_BUF_LEN);
 ```
-The stm32-HAL will then call two functions, triggered when the buffer is half, and fully filled. This means the MEM buffer can be used as a [[DoubleBuffer(Ping-pongBuffer)]]
+The stm32-HAL will then call two functions, triggered when the buffer is half, and fully filled. This means the MEM buffer can be used as a [[Double Buffer (Ping-pong Buffer)]]
 To use them, they must be defined in `main.c`:
 ```C
 /* USER CODE BEGIN 4 */
