@@ -34,7 +34,7 @@ A+B+C = stator field vector -> Clarke + Park transforms -> direct and quadrature
 Following the Clarke/Park transformation, PI control could be used to maximise the quadrature component and minimise the direct component:  
 ![[foc-PI-control-of-d-and-q-components.png]]
 
-#### Space-Vector Modulation Theory
+#### Space Vector Modulation Theory
 Space Vector Modulation (SVM) is an implementation method for FOC that replaces the inverse Clarke transform when converting from the ideal stator field into the 3-phase signals to the motor.  
 ![[foc-svm-block-diagram.png]]
 
