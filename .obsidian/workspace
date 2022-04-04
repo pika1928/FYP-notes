@@ -28,7 +28,19 @@
         }
       },
       {
-        "id": "125ed6c21484ef5c",
+        "id": "777868656a2613d8",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Dailys/2022-03-31.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      },
+      {
+        "id": "6f48f6548cd1dac1",
         "type": "leaf",
         "state": {
           "type": "markdown",
@@ -169,11 +181,55 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "MotorControl/FYP.md"
+                "file": "Dailys/2022-03-31.md"
               }
             }
+          },
+          {
+            "id": "b484e220fead19df",
+            "type": "leaf",
+            "state": {
+              "type": "localgraph",
+              "state": {
+                "file": "Dailys/2022-03-31.md",
+                "options": {
+                  "collapse-filter": true,
+                  "search": "",
+                  "localJumps": 1,
+                  "localBacklinks": true,
+                  "localForelinks": true,
+                  "localInterlinks": false,
+                  "showTags": false,
+                  "showAttachments": false,
+                  "hideUnresolved": false,
+                  "collapse-color-groups": true,
+                  "colorGroups": [],
+                  "collapse-display": true,
+                  "showArrow": false,
+                  "textFadeMultiplier": 0,
+                  "nodeSizeMultiplier": 1,
+                  "lineSizeMultiplier": 1,
+                  "collapse-forces": true,
+                  "centerStrength": 0.518713248970312,
+                  "repelStrength": 10,
+                  "linkStrength": 1,
+                  "linkDistance": 250,
+                  "scale": 0.7132754626224425,
+                  "close": false
+                }
+              }
+            }
+          },
+          {
+            "id": "125ed6c21484ef5c",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
           }
-        ]
+        ],
+        "currentTab": 2
       },
       {
         "id": "3441fdf730da04a2",
@@ -185,7 +241,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "MotorControl/FYP.md",
+                "file": "Dailys/2022-03-31.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -212,25 +268,24 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "horizontal",
     "width": 300,
     "collapsed": true
   },
-  "active": "125ed6c21484ef5c",
+  "active": "777868656a2613d8",
   "lastOpenFiles": [
-    "MotorControl/FYP.md",
+    "Dailys/2022-03-31.md",
     "MotorControl/ESC.md",
-    "Dailys/2022-03-30.md",
     "MotorControl/FOC.md",
+    "MotorControl/foc-svm-block-diagram.png",
+    "Dailys/2022-03-30.md",
+    "MotorControl/FYP.md",
     "MotorControl/DMA.md",
     "MotorControl/FreeRTOS.md",
     "Dailys/2022-03-24.md",
-    "Dailys/2022-03-29.md",
-    "Dailys/2022-03-28.md",
-    "Dailys/2022-03-25.md"
+    "Dailys/2022-03-29.md"
   ]
 }

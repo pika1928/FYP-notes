@@ -1,20 +1,28 @@
 {
   "recentFiles": [
     {
-      "basename": "FYP",
-      "path": "MotorControl/FYP.md"
+      "basename": "2022-03-31",
+      "path": "Dailys/2022-03-31.md"
     },
     {
       "basename": "ESC",
       "path": "MotorControl/ESC.md"
     },
     {
+      "basename": "FOC",
+      "path": "MotorControl/FOC.md"
+    },
+    {
+      "basename": "foc-svm-block-diagram",
+      "path": "MotorControl/foc-svm-block-diagram.png"
+    },
+    {
       "basename": "2022-03-30",
       "path": "Dailys/2022-03-30.md"
     },
     {
-      "basename": "FOC",
-      "path": "MotorControl/FOC.md"
+      "basename": "FYP",
+      "path": "MotorControl/FYP.md"
     },
     {
       "basename": "DMA",
