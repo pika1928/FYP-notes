@@ -28,36 +28,36 @@
         }
       },
       {
-        "id": "5b4b2c75bdd9a5ef",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "Dailys/2022-04-05.md",
-            "mode": "source",
-            "source": false
-          }
-        }
-      },
-      {
-        "id": "e95b242ceecb2a5c",
-        "type": "leaf",
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "Dailys/2022-04-06.md",
-            "mode": "source",
-            "source": false
-          }
-        }
-      },
-      {
         "id": "6f48f6548cd1dac1",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
+            "file": "Dailys/2022-04-14.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      },
+      {
+        "id": "182f78bb8277263f",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
             "file": "MotorControl/FYP.md",
+            "mode": "source",
+            "source": false
+          }
+        }
+      },
+      {
+        "id": "0a3111be919e5122",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "MotorControl/DRV8353RS.md",
             "mode": "source",
             "source": false
           }
@@ -193,7 +193,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Dailys/2022-04-06.md"
+                "file": "Dailys/2022-04-14.md"
               }
             }
           },
@@ -203,7 +203,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Dailys/2022-04-06.md",
+                "file": "Dailys/2022-04-14.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -253,7 +253,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Dailys/2022-04-06.md",
+                "file": "Dailys/2022-04-14.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -285,19 +285,20 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
-  "active": "e95b242ceecb2a5c",
+  "active": "6f48f6548cd1dac1",
   "lastOpenFiles": [
+    "Dailys/2022-04-14.md",
+    "Dailys/2022-04-12.md",
     "Dailys/2022-04-06.md",
-    "Dailys/2022-04-05.md",
+    "MotorControl/DRV8353RS.md",
     "MotorControl/ESC.md",
     "MotorControl/FYP.md",
-    "Dailys/2022-04-04.md",
-    "MotorControl/FOC.md",
-    "Dailys/2022-03-31.md",
-    "Dailys/2022-04-01.md",
-    "Dailys/2022-03-30.md",
-    "MotorControl/2022-04-03.md"
+    "Dailys/2022-04-07.md",
+    "Dailys/2022-03-24.md",
+    "Dailys/2022-03-25.md",
+    "Dailys/2022-03-28.md"
   ]
 }
