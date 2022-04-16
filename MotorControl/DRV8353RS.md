@@ -28,4 +28,77 @@ Pins:
 p34: X5R or X7R 1uF 16V capacitor between VDRAIN and VCP pins, 
 and X5R or X7R 47nF (VDRAIN-rated)V capacitor between CPH and CPL pins. 
 
+#### VGLS Voltage Linear Regulator for L gates
+p34: X5R or X7R 1uF 16V capacitor between VGLS and GND.
 
+#### VM Gate Driver Power Supply
+![[#^VMgatedriverpowersupply]]
+
+#### DVDD 5V 10mA linear regulator
+p38: X5R or X7R 1uF 6.3V capacitor between DVDD and DGND/GND. ^DVDDlinearregulatorsupply
+
+#### LM5008A Buck Switching Regulator
+p46: points to LM5008A datasheet.
+p48: 0.47uF capacitor between VCC and GND.
+In HV applications a 7.5-14V voltage can be applied to VCC (using a diode) to turn off the internal regulator, reducing internal power dissipation.
+p49: R_T between V_IN and R_T/SD pins must be sized according to `R_T ≥ Vin * Ton / 0.1385n`
+![[#^RTon]]
+![[#^RCLToff]]
+p50: 0.01uF capacitor between BST and SW pins. 
+
+### Implementation details 
+#### VM Gate Driver Power Supply
+p34: can be supplied from HV motor supply voltage *or from a more efficient LV 'gate driver supply' switching/linear regulator to improve device efficiency.* 
+The integrated LM5008A buck regulator in the **R** skews can perform this task.  ^VMgatedriverpowersupply
+
+#### IDRIVE and TDRIVE
+##### IDRIVE
+Adjustable gate-drive current to control switches' V_DS slew rates which are critical in EMI, dV/dt gate turn-on (important for shoot-through), and parasitics in the half-bridges (induced by switching voltage transients).
+By changing the gate current in the Q_GD / Miller charging region, the slew rate of the external MOSFETs can be altered.
+IDRIVE can be configured for 50mA-1A for source and 100mA-2A for sink gate currents. 
+After turn-on/turn-off, IHOLD of 25mA is then used for the gate current, increasing efficiency. 
+
+##### TDRIVE 
+Automatic gate-drive state machine that:
+- inserts dead-time to prevent shoot-through, 
+- prevents gate turn-on due to parasitic dV/dt, 
+- and detects MOSFET gate faults.
+By measuring MOSFET V_GS, the switching between H/L can be automatically done without a fixed dead-time, this mean dead-time is automatically and effectively adjusted for temperature drift and MOSFET parameter variation. 
+In addition, `t_DEAD` can be added on top of the automatic dead-time. 
+
+#### MOSFET Over-Current Protection / Short Circuit
+If the MOSFET voltage V_DS is under V_VDS_OCP for t_OCP then the OCP protection trips. MOSFET V_DS is measured as depicted on page 38 figure 35.
+
+#### DVDD 5V 10mA linear regulator
+![[#^DVDDlinearregulatorsupply]]
+If load current exceeds 10mA, DVDD behaves as a 10mA constant-current source (voltage drops). 
+**Power Dissipated** by DRV835x DVDD:  P = (V_VM-V_DVDD)\*I_DVDD.
+
+#### Current-Shunt Amplifiers (drv835**3**xx)
+p41: Bi-directional current
+  Equation for current through R_SENSE resistors.
+  Gain of 5, 10, 20 or 40. 
+p43: Uni-directional current
+
+Auto Calibration occurs on boot for which 50us should be allowed before measurements taken. 
+<u>N.B. Auto Calibration sets the amplifiers to max gain.</u>
+
+p45: MOSFET V_DS sense mode: can be used by setting CSA_FET via SPI and can be used to measure the Voltage drop across the Low-side MOSFET's R_DS(on), allowing the <u>half-bridge current to be calculated</u>. 
+
+#### LM5008A Buck DC-DC Regulator
+Requires a minimum output voltage ripple of 25-50mV in order to function.
+If this is unacceptable, the output can be taken from between the output resistor and capacitor, but load regulation will be "slightly degraded".
+
+The output voltage is determined by the resistor potential divider, the feedback pin FB, is compared against an internal 2.5V.
+Over-Voltage is triggered when FB rises above 2.875V.
+
+R_T determines the On-Time of the buck switching regulator, at maximum Vin, R_T must give a T_ON of >400ns. ^RTon
+
+The LM5008A can be disabled by connecting the R_T/SD pin to GND.
+
+R_CL determines the off-time if an Over-Current occurs (Iout > 0.51A). ^RCLToff
+
+125°C max Junction temperature. 
+At 165°C the LM5008A resets in low-power mode where the buck-switch is disabled. 
+
+#### Under-Voltage Lock-Out (UVLO)
