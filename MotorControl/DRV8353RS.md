@@ -101,4 +101,44 @@ R_CL determines the off-time if an Over-Current occurs (Iout > 0.51A). ^RCLToff
 125°C max Junction temperature. 
 At 165°C the LM5008A resets in low-power mode where the buck-switch is disabled. 
 
-#### Under-Voltage Lock-Out (UVLO)
+#### Gate Driver Protection Circuits
+##### Under-Voltage Lock-Out (UVLO)
+V_M and V_DRAIN UVLO disables the MOSFETs.
+V_CP and V_GLS UVLO also disables the MOSFETs, but this behaviour can be disabled by setting DIS_GDUV via SPI. 
+
+##### Over-Current Protection (OCP)
+MOSFETs:
+V_DS OCP threshold set through VDS_LVL SPI register, 
+t_OCP_DEG deglitch set through OCP_DEG SPI register, 
+SPI register OCP_MODE can operate either: latched shutdown, automatic retry, report only, disabled (see page 51). 
+In Cycle-By-Cycle mode (default), MOSEF OCP faults will be cleared on every next rising edge PWM input. 
+OCP_ACT SPI register changes OCP actions between effecting relevant half-briges (0: individual) or all half-bridges (1: linked).
+
+V_SENSE:
+If V_SP > V_SEN_OCP for > t_OCP_DEG,  SEN_OCP event occurs and OCP_MODE action is taken.
+V_SEN_OCP threshold set through SEN_LVL SPI register,
+t_OCP_DEG deglitch set through OCP_DEG SPI register,, 
+SPI register OCP_MODE can operate either: latched shutdown, automatic retry, report only, disabled (see page 51-52). 
+
+##### Gate Driver Fault
+If GHx or GLx do not change after t_DRIVE of being driven, all MOSFETs are disabled and a fault is reported (FAULT, GDF and VGS bits corresponding to GHx and GLx). Operation resumes following clearing the CLR_FLT bit via SPI.
+GDF can be disabled by setting DIS_GDF_UVLO via SPI. 
+GDFs are indicative of too low I_DRIVE or t_DRIVE settings, or a Gate-Source short. 
+
+##### OCP Soft Shutdown
+I_DRIVEN is reduced 7 settings / to minimum value in the event of OCP to prevent large V spikes across MOSFET Drain-Source.
+
+##### Over-Temperature (Thermal) Warning (OTW)
+OTW bit set if die temp > T_OTW. OTW cleared if temp falls < hysteresis point.
+
+##### Over-Temperature (Thermal) Shutdown (OTSD)
+T_OTSD, if exceeded MOSFETs disabled, charge pump disabled, FAULT reorted, TSD bit set. 
+Send CLR_FLT over SPI to clear TSD.
+
+##### FAULT Table on p53
+[[drv835x_datasheet.pdf#page=53]]
+
+### Device Functional Modes
+#### Gate Driver
+##### Sleep Mode
+ENABLE pin low for at least t_SLEEP. 
