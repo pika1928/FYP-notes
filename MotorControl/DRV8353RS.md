@@ -5,6 +5,7 @@
 ## (DRV835)**3RS** Block diagram
 ![[drv835x_datasheet.pdf#page=29]]
 
+---
 ## Notes
 ### PWM control modes
 <u>6x PWM mode:</u> 2 PWM signals for each half-bridge, 1 for H, 1 for L, if both H & L are high the output switches are made low ie high-Z (rather than high as commanded).   
@@ -15,6 +16,7 @@
 ### Device interface modes (SPI vs HW)
 #### SPI
 Pins: SCLK (clock), SDI (data in), SDO (data out), and nSCS (chip select: active-low).
+![[#Programming over SPI]]
 
 #### HW (Hardware)
 Pins: 
@@ -24,6 +26,8 @@ Pins:
 - VDS (switch drain-source over-voltage threshold)
 
 ### Supporting circuitry
+For summary see Layout Guidelines [[drv835x_datasheet.pdf#page=78]].
+
 #### VCP Voltage Charge Pump for H gates
 p34: X5R or X7R 1uF 16V capacitor between VDRAIN and VCP pins, 
 and X5R or X7R 47nF (VDRAIN-rated)V capacitor between CPH and CPL pins. 
@@ -33,6 +37,9 @@ p34: X5R or X7R 1uF 16V capacitor between VGLS and GND.
 
 #### VM Gate Driver Power Supply
 ![[#^VMgatedriverpowersupply]]
+p77: 0.1uF VM-rated capacitor between VM and GND. 
+		+ bulk-capacitor 
+![[#^VMBulk]]
 
 #### DVDD 5V 10mA linear regulator
 p38: X5R or X7R 1uF 6.3V capacitor between DVDD and DGND/GND. ^DVDDlinearregulatorsupply
@@ -107,14 +114,14 @@ V_M and V_DRAIN UVLO disables the MOSFETs.
 V_CP and V_GLS UVLO also disables the MOSFETs, but this behaviour can be disabled by setting DIS_GDUV via SPI. 
 
 ##### Over-Current Protection (OCP)
-MOSFETs:
+###### MOSFETs:
 V_DS OCP threshold set through VDS_LVL SPI register, 
 t_OCP_DEG deglitch set through OCP_DEG SPI register, 
 SPI register OCP_MODE can operate either: latched shutdown, automatic retry, report only, disabled (see page 51). 
 In Cycle-By-Cycle mode (default), MOSEF OCP faults will be cleared on every next rising edge PWM input. 
 OCP_ACT SPI register changes OCP actions between effecting relevant half-briges (0: individual) or all half-bridges (1: linked).
 
-V_SENSE:
+###### V_SENSE:
 If V_SP > V_SEN_OCP for > t_OCP_DEG,  SEN_OCP event occurs and OCP_MODE action is taken.
 V_SEN_OCP threshold set through SEN_LVL SPI register,
 t_OCP_DEG deglitch set through OCP_DEG SPI register,, 
@@ -138,7 +145,52 @@ Send CLR_FLT over SPI to clear TSD.
 ##### FAULT Table on p53
 [[drv835x_datasheet.pdf#page=53]]
 
-### Device Functional Modes
-#### Gate Driver
-##### Sleep Mode
-ENABLE pin low for at least t_SLEEP. 
+#### Device Functional Modes
+##### Gate Driver
+<u>Sleep Mode:</u>  ENABLE pin low for > t_SLEEP.  To wake ENABLE high for > t_WAKE. 
+<u>Operating Mode:</u>  ENABLE high and V_M > V_UVLO. 
+<u>Fault Reset:</u>  set CLR_FLT via SPI or issue reset pulse to ENABLE bit (t_RST). 
+
+##### Buck Regulator
+<u>Shutdown Mode:</u> V_SD < 0.7V (LDO and switching regulator turn off). 
+<u>Active Mode:</u> VCC > UV threshold. 
+	Discontinuous Conduction Mode (DCM) when load current < half peak-to-peak inductor ripple
+
+#### Programming over SPI
+[[drv835x_datasheet.pdf#page=54]]
+SPI Data Input: 16 bit word: 5bit command (1b R/W ,4b address) + 11bits data. 
+SPI Data Output: 16 bit: 5bit null, 11bits register-data. 
+
+##### Register Map
+[[drv835x_datasheet.pdf#page=56]]
+p57: Fault Status Register 1 (read only)
+p58: Fault Status Register 2 (read only)
+p59: Driver Control Register (read/write)
+p60: Gate Drive HS Register (read/write)  (High Side)
+p61: Gate Drive LS Register (read/write)   (Low Side)
+p62: OCP Control Register (read/write)     (Over Current Protection)
+p63: CSA Control Register (read/write)     (Current Sense Amplification)
+p64: CSA Control Register Cont. (read/write)
+
+### Application and Implementation
+Single supply, 3-phase BLDC motor drive with per-half-bridge current sense:
+![[drv835x_datasheet.pdf#page=66]]
+
+
+### Power Supply Recommendations
+p78: Bulk Capacitor between V_M and GND of at least 10uF. ^VMBulk
+
+To minimise parasitic inductance and allow large current delivery from the bulk capacitor use: 
+- Thick traces on the high-current path around MOSFETs. 
+- Many vias on traces transferring across PCB layers. 
+
+### Layout Recommendations
+Use dedicated traces to connect the VDRAIN and SLx pins to the Drains and Sources of respective MOSFETs to improve V_DS sensing and OCP detection. 
+
+Minimise gate driver loop area 
+	High Side: GHx -> HS-Gate -> HS-Source -> SHx
+	Low Side: GLx -> LS-Gate ->LS-Source -> SPx/SLx
+
+Buck-Regulator Layout Guidelines (p78):
+	![[drv835x_datasheet.pdf#page=78]]
+
