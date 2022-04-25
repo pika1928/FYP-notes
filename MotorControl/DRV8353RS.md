@@ -44,6 +44,9 @@ p77: 0.1uF VM-rated capacitor between VM and GND.
 #### DVDD 5V 10mA linear regulator
 p38: X5R or X7R 1uF 6.3V capacitor between DVDD and DGND/GND. ^DVDDlinearregulatorsupply
 
+#### VREF Current Shunt Amplifier voltage reference 
+p9 / p41: X5R or X7R 0.1uF 6.3V capacitor between VREF and AGND pins. 
+
 #### LM5008A Buck Switching Regulator
 p46: points to LM5008A datasheet.
 p48: 0.47uF capacitor between VCC and GND.

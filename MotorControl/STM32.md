@@ -6,6 +6,7 @@ Can then pick an appropriately powerful, cost-effective MCU for implementation.
 It is likely that for a given stm32-MCU there will be a drop-in replacement with higher-specs in an equivalent package. 
 
 ## Programming
+---
 ### Read ADC
 #### Single conversion
 [Digi-Key youtube tutorial on stm32 ADCs](https://youtu.be/EsZLgqhqfO0)
@@ -51,8 +52,60 @@ In the while `loop`:
 #### [[DMA]] continuous stream
 ![[DMA#stm32 -HAL implementation]]
 
+---
+### SPI 
+[Digi-Key youtube tutorial on stm32 SPI](https://youtu.be/eFKeNPJq50g)
+In Pinout & Configuration, under ==Connectivity==, select an SPI peripheral interface. 
+Full-Duplex `Mode` allows for simultaneous R/W on the MOSI & MISO lines. 
+If a hardware chip-select is needed, a nearby `GPIO_Output` pin can be assigned and used manually in code. 
+In the ==SPI== `Parameter Settings`, `Data Size` can be set to 8 or 16 bits and under `Clock Parameters`: `Prescaler` can be adjusted to lower the communication speed:
+![[stm32-spi-configuration.png]]
+A user-friendly label for the "GPIO_Output" pin, such as "SPI1_nSCS", can be set by 'right-clicking' > 'Enter User Label'. 
+
+In `main()` a buffer for SPI can be created:
+```C
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
+	char spi_buf[20];
+```
+and the nSCS pin can be set to it's default high state after GPIO initialisation:
+```C
+int main(void)
+{
+  ⋮
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  ⋮
+  MX_SPI1_Init();
+  /* USER CODE BEGIN 2 */
+    // nSCS pin should be default: high
+    HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_SET);
+```
+
+SPI communication can then be carried out as follows:
+```C
+	const uint16_t SPI_COMMAND = 0b0000101011110000;
+	  
+	HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi1, (uint8_t *)&SPI_COMMAND, 2, 100);
+	HAL_SPI_Receive(&hspi1, (uint8_t *)spi_buf, 2, 100);
+	HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_SET);
+
+	// !!!Check return status of SPI_Transmit
+```
+where `HAL_SPI_Transmit()` requires: 
+-	a handle to the SPI peripheral, 
+-	the data to be sent, 
+-	the number of bytes, 
+-	and a timeout duration (ms). 
+and `HAL_SPI_Receive()` requires similar except a pointer to a buffer to fill with data read instead of a pointer to a buffer of data to send. 
+
+#### Async SPI with call-back interrupts
+The `HAL_SPI_Transmit_IT()` and `HAL_SPI_Receive_IT()` functions can be used instead and the `HAL_SPI_TxCpltCallback()` and `HAL_SPI_RxCpltCallback()` functions implemented to be executed upon SPI transmission/receiving completing. 
 
 
+---
 ### Timers as counters
 [Digi-Key youtube tutorial on stm32 Timers and Timer-Interrupts](https://youtu.be/VfbW6nfG4kw)
 #### Pre-scalers

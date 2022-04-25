@@ -8,17 +8,43 @@ Title: EV Motor Control using FreeRTOS on an Embedded CPU
 <u>Objective2:</u> [[#Example ESC PCB]]. 
 <u>Description:</u> Produce an exemplar implementation of the project demonstrating an embedded-CPU running FreeRTOS running the FOC program, controlling a model-scale BLDC/PMSM motor.  
 
+
+## To Do
+##### ESC PCB
+- [x] DRV8353 schematic wiring
+- [ ] MOSFET selection 
+- [ ] feedback resistor selection 
+- [ ] ==STM32 output configuration== 
+- [ ] USB connector 
+- [ ] CANBUS connector 
+- [ ] Sensor (encoder) connector 
+
+- [ ] Double check DRV schematic
+- [ ] LM5008A component selection 
+- [ ] DRV8353 component selection 
+- [ ] PCB layout 
+
+##### FOC Program
+- [ ] Outline files & functions according to plan [[FOC#Implementation]]
+- [ ] Write code for each file & function
+- [ ] Test o.o
+
+
+---
 ## Portable [[FreeRTOS]] [[FOC]] program
+---
 Developed using an [[stm32]] nucleo-f446re development board and the STM32CubeIDE.
 
 ### Program structure
-
 
 #### FOC
 The FOC algorithm part of the program will be implemented using Space Vector Modulation: 
 ![[FOC#Space Vector Modulation]]
 
+
+---
 ## Example [[ESC]] PCB
+---
 The model-scale example PCB will aim to deliver power on a level suitable for hobby RC vehicles (such as RC cars) or hobby e-vehicles (such as e-bikes, e-scooters, e-skateboards).
 This will hopefully serve as a safe, low-power analogy for EVs. 
 ![[ESC#FYP Model-scale ESC]]
