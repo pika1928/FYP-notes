@@ -11,23 +11,30 @@ Title: EV Motor Control using FreeRTOS on an Embedded CPU
 
 ## To Do
 ##### ESC PCB
-- [x] DRV8353 schematic wiring
+- [x] DRV8353 schematic wiring 
+- [x] ==STM32 output configuration== 
+- [x] USB connector 
+	- [ ] Power MCU over USB without batteries? 
+- [ ] CANBUS connector 
+- [ ] Encoder connector 
+	- [ ] Hall-effect sensor connector? 
+- [ ] Double check DRV schematic 
+
 - [ ] MOSFET selection 
 - [ ] feedback resistor selection 
-- [ ] ==STM32 output configuration== 
-- [ ] USB connector 
-- [ ] CANBUS connector 
-- [ ] Sensor (encoder) connector 
-
-- [ ] Double check DRV schematic
 - [ ] LM5008A component selection 
 - [ ] DRV8353 component selection 
+- [ ] Remaining components selection 
 - [ ] PCB layout 
+- [ ] PCB order file generation 
+- [ ] PCB file checking 
+- [ ] PCB ordering 
 
 ##### FOC Program
-- [ ] Outline files & functions according to plan [[FOC#Implementation]]
-- [ ] Write code for each file & function
-- [ ] Test o.o
+- [ ] Configure FreeRTOS on stm32 
+- [ ] Outline files & functions according to plan [[FOC#Implementation]] 
+- [ ] Write code for each file & function 
+- [ ] Test o.o 
 
 
 ---
@@ -82,19 +89,23 @@ Low Dropout Regulator vs Switched DC-DC converter
 `Part chosen:` Hubei KENTO Elec C2290
 `Reasons:` 0603 "White" LED, 3V drop, super cheap, very well stocked. 
 
+`Component:` Power LED
+`Part chosen:` Hubei KENTO Elec KT-0603R
+`Reasons:` 0603 Red LED, 2V drop, super cheap, very well stocked. 
+
 `Component:` Gate driver for MOSFETs
 `Part chosen:` Texas Instruments [[DRV8353RS]]
 `Reasons:` The TI drv835x is a MOSFET gate driver aimed at 3-phase motor control applications. It can be spec'd to include three current shunt amplifiers (drv835**3**rs) to measure the current on each phase as well as to include a DC-DC buck converter (drv8353**r**s) that can source 350mA @ 2.5-75V, ideal for powering the MCU.
 These optional integrated additional features removing the need for additional ICs and circuitry, greatly reduce the complexity of the ESC PCB design. This decreases the time necessary for design, validation and testing and increasing the likelihood of success. 
 
+`Component:` USB C receptacle
+`Part chosen:`  Korean Hroparts Elec TYPE-C-31-M-12
+`Reasons:` SMD solder-able by JLCPCB, USB 2.0 spec so simpler to implement, cheap and very well stocked. 
 
 `Component:` ESD IO protection for MCU
-`Part chosen:` 
-`Reasons:` 
+`Part chosen:` STM USBLC6-2SC6
+`Reasons:` Designed specifically for USB ESD protection, very well stocked. 
 
-`Component:` 
-`Part chosen:` 
-`Reasons:` 
 
 `Component:` 
 `Part chosen:` 

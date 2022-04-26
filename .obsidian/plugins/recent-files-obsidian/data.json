@@ -1,24 +1,40 @@
 {
   "recentFiles": [
     {
-      "basename": "FYP",
-      "path": "MotorControl/FYP.md"
+      "basename": "2022-04-25",
+      "path": "Dailys/2022-04-25.md"
     },
     {
-      "basename": "FOC",
-      "path": "MotorControl/FOC.md"
+      "basename": "2022-04-26",
+      "path": "Dailys/2022-04-26.md"
     },
     {
       "basename": "2022-04-24",
       "path": "Dailys/2022-04-24.md"
     },
     {
-      "basename": "2022-04-21",
-      "path": "Dailys/2022-04-21.md"
-    },
-    {
       "basename": "STM32",
       "path": "MotorControl/STM32.md"
+    },
+    {
+      "basename": "FYP",
+      "path": "MotorControl/FYP.md"
+    },
+    {
+      "basename": "ESC",
+      "path": "MotorControl/ESC.md"
+    },
+    {
+      "basename": "FreeRTOS",
+      "path": "MotorControl/FreeRTOS.md"
+    },
+    {
+      "basename": "FOC",
+      "path": "MotorControl/FOC.md"
+    },
+    {
+      "basename": "2022-04-21",
+      "path": "Dailys/2022-04-21.md"
     },
     {
       "basename": "2022-03-28",
@@ -39,10 +55,6 @@
     {
       "basename": "DRV8353RS",
       "path": "MotorControl/DRV8353RS.md"
-    },
-    {
-      "basename": "ESC",
-      "path": "MotorControl/ESC.md"
     },
     {
       "basename": "2022-04-20",
@@ -103,10 +115,6 @@
     {
       "basename": "foc-svm-block-diagram",
       "path": "MotorControl/foc-svm-block-diagram.png"
-    },
-    {
-      "basename": "FreeRTOS",
-      "path": "MotorControl/FreeRTOS.md"
     },
     {
       "basename": "foc-svm-basic-vector-abc-components",

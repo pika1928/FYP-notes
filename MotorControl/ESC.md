@@ -75,8 +75,13 @@ large input lead capacitor
 trace copper weight (trace tinning?)
 
 ### IO
+#### STM32 pinout
+Configured using CubeMX in CubeIDE:
+![[esc-stm32-pinout.png]]
+
 #### USB
-electrostatic protection
+[Dubious Creations article tutorial on implementing USB C 2.0](https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/) 
+Controlled impedance:
 
 
 ### Crystal oscillator

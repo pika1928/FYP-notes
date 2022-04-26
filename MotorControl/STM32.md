@@ -53,59 +53,6 @@ In the while `loop`:
 ![[DMA#stm32 -HAL implementation]]
 
 ---
-### SPI 
-[Digi-Key youtube tutorial on stm32 SPI](https://youtu.be/eFKeNPJq50g)
-In Pinout & Configuration, under ==Connectivity==, select an SPI peripheral interface. 
-Full-Duplex `Mode` allows for simultaneous R/W on the MOSI & MISO lines. 
-If a hardware chip-select is needed, a nearby `GPIO_Output` pin can be assigned and used manually in code. 
-In the ==SPI== `Parameter Settings`, `Data Size` can be set to 8 or 16 bits and under `Clock Parameters`: `Prescaler` can be adjusted to lower the communication speed:
-![[stm32-spi-configuration.png]]
-A user-friendly label for the "GPIO_Output" pin, such as "SPI1_nSCS", can be set by 'right-clicking' > 'Enter User Label'. 
-
-In `main()` a buffer for SPI can be created:
-```C
-int main(void)
-{
-  /* USER CODE BEGIN 1 */
-	char spi_buf[20];
-```
-and the nSCS pin can be set to it's default high state after GPIO initialisation:
-```C
-int main(void)
-{
-  ⋮
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  ⋮
-  MX_SPI1_Init();
-  /* USER CODE BEGIN 2 */
-    // nSCS pin should be default: high
-    HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_SET);
-```
-
-SPI communication can then be carried out as follows:
-```C
-	const uint16_t SPI_COMMAND = 0b0000101011110000;
-	  
-	HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_RESET);
-	HAL_SPI_Transmit(&hspi1, (uint8_t *)&SPI_COMMAND, 2, 100);
-	HAL_SPI_Receive(&hspi1, (uint8_t *)spi_buf, 2, 100);
-	HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_SET);
-
-	// !!!Check return status of SPI_Transmit
-```
-where `HAL_SPI_Transmit()` requires: 
--	a handle to the SPI peripheral, 
--	the data to be sent, 
--	the number of bytes, 
--	and a timeout duration (ms). 
-and `HAL_SPI_Receive()` requires similar except a pointer to a buffer to fill with data read instead of a pointer to a buffer of data to send. 
-
-#### Async SPI with call-back interrupts
-The `HAL_SPI_Transmit_IT()` and `HAL_SPI_Receive_IT()` functions can be used instead and the `HAL_SPI_TxCpltCallback()` and `HAL_SPI_RxCpltCallback()` functions implemented to be executed upon SPI transmission/receiving completing. 
-
-
----
 ### Timers as counters
 [Digi-Key youtube tutorial on stm32 Timers and Timer-Interrupts](https://youtu.be/VfbW6nfG4kw)
 #### Pre-scalers
@@ -164,3 +111,100 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 }
 ```
+
+---
+## Peripheral connections
+---
+### SPI 
+[Digi-Key youtube tutorial on stm32 SPI](https://youtu.be/eFKeNPJq50g)
+In Pinout & Configuration, under ==Connectivity==, select an SPI peripheral interface. 
+Full-Duplex `Mode` allows for simultaneous R/W on the MOSI & MISO lines. 
+If a hardware chip-select is needed, a nearby `GPIO_Output` pin can be assigned and used manually in code. 
+In the ==SPI== `Parameter Settings`, `Data Size` can be set to 8 or 16 bits and under `Clock Parameters`: `Prescaler` can be adjusted to lower the communication speed:
+![[stm32-spi-configuration.png]]
+A user-friendly label for the "GPIO_Output" pin, such as "SPI1_nSCS", can be set by 'right-clicking' > 'Enter User Label'. 
+
+In `main()` a buffer for SPI can be created:
+```C
+int main(void)
+{
+  /* USER CODE BEGIN 1 */
+	char spi_buf[20];
+```
+and the nSCS pin can be set to it's default high state after GPIO initialisation:
+```C
+int main(void)
+{
+  ⋮
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  ⋮
+  MX_SPI1_Init();
+  /* USER CODE BEGIN 2 */
+    // nSCS pin should be default: high
+    HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_SET);
+```
+
+SPI communication can then be carried out as follows:
+```C
+	const uint16_t SPI_COMMAND = 0b0000101011110000;
+	  
+	HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_RESET);
+	HAL_SPI_Transmit(&hspi1, (uint8_t *)&SPI_COMMAND, 2, 100);
+	HAL_SPI_Receive(&hspi1, (uint8_t *)spi_buf, 2, 100);
+	HAL_GPIO_WritePin(GPIOC, SPI1_nSCS, GPIO_PIN_SET);
+
+	// !!!Check return status of SPI_Transmit
+```
+where `HAL_SPI_Transmit()` requires: 
+-	a handle to the SPI peripheral, 
+-	the data to be sent, 
+-	the number of bytes, 
+-	and a timeout duration (ms). 
+and `HAL_SPI_Receive()` requires similar except a pointer to a buffer to fill with data read instead of a pointer to a buffer of data to send. 
+
+#### Async SPI with call-back interrupts
+The `HAL_SPI_Transmit_IT()` and `HAL_SPI_Receive_IT()` functions can be used instead and the `HAL_SPI_TxCpltCallback()` and `HAL_SPI_RxCpltCallback()` functions implemented to be executed upon SPI transmission/receiving completing. 
+
+---
+### SWD / JTAG
+In **System Core > SYS**, enable SWD with/without 'Trace' (SWO pin) by selecting `Trace Asynchronous Sw` or `Serial Wire`:
+![[stm32-swd-configuration.png]]
+
+---
+### USB
+#### USB 1.0 "Full Speed"  12Mbps
+In **Connectivity**, enable **USB_OTG_FS** as `Host`, `Device`, or `Dual Role`:
+![[stm32-usb-fs-configuration.png]]
+Then in **Middleware > USB_DEVICE**, a USB class can be configured such as `Communication Device` so that the USB appears as a Virtual Com Port:
+![[stm32-usb-fs-device-class.png]]
+
+#### USB 2.0 "High Speed" 480Mbps
+
+---
+### CANBUS
+2.0A and B up to 1Mbps
+
+---
+### Encoder
+[DeepBlue embedded article on using encoders with stm32](https://deepbluembedded.com/stm32-timer-encoder-mode-stm32-rotary-encoder-interfacing/) 
+In **Timers > TIMx**, select a timer capable of handling encoder signals (STM32F4xx: TIM 2, 3, 4 & 5) and set the `Combined Channels` setting to `Encoder Mode`: 
+![[stm32-encoder-configuration.png]]
+This will require a HSE clock/crystal.
+CubeIDE will then initialise the timer:
+```C
+int main(void) {
+
+  /* Initialize all configured peripherals */
+  MX_TIM2_Init();
+}
+```
+The encoder must be started:
+```C
+	HAL_TIM_Encoder_Start(&htim2, TIM_CHANNEL_ALL);
+```
+Then the timer count will increment/decrement depending upon which direction the encoder turns, and can be read using deconstruction: 
+```C
+	count = (TIMx->CNT);
+```
+
