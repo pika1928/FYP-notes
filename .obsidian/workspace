@@ -33,7 +33,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Dailys/2022-04-25.md",
+            "file": "Dailys/2022-04-27.md",
             "mode": "source",
             "source": false
           }
@@ -177,7 +177,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "8ab4741245adce55",
@@ -193,7 +194,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Dailys/2022-04-25.md"
+                "file": "Dailys/2022-04-27.md"
               }
             }
           },
@@ -203,7 +204,7 @@
             "state": {
               "type": "localgraph",
               "state": {
-                "file": "Dailys/2022-04-25.md",
+                "file": "Dailys/2022-04-27.md",
                 "options": {
                   "collapse-filter": true,
                   "search": "",
@@ -252,7 +253,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Dailys/2022-04-25.md",
+                "file": "Dailys/2022-04-27.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -289,20 +290,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "active": "6f48f6548cd1dac1",
   "lastOpenFiles": [
-    "Dailys/2022-04-25.md",
+    "Dailys/2022-04-27.md",
     "Dailys/2022-04-26.md",
-    "Dailys/2022-04-24.md",
-    "MotorControl/STM32.md",
-    "MotorControl/FYP.md",
+    "Dailys/2022-04-28.md",
     "MotorControl/ESC.md",
+    "MotorControl/FYP.md",
+    "MotorControl/STM32.md",
     "MotorControl/FreeRTOS.md",
-    "MotorControl/FOC.md",
-    "Dailys/2022-04-21.md",
-    "Dailys/2022-03-28.md"
+    "Dailys/2022-04-25.md",
+    "Dailys/2022-04-24.md",
+    "MotorControl/FOC.md"
   ]
 }

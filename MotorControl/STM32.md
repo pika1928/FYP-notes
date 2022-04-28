@@ -184,6 +184,7 @@ Then in **Middleware > USB_DEVICE**, a USB class can be configured such as `Comm
 ---
 ### CANBUS
 2.0A and B up to 1Mbps
+Requires external CAN transceiver to modulate signals from 0-3.3V to CANL/CANH that go from 0-VCC/2 and VCC/2-VCC. 
 
 ---
 ### Encoder

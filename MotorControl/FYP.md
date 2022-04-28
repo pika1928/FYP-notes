@@ -15,8 +15,8 @@ Title: EV Motor Control using FreeRTOS on an Embedded CPU
 - [x] ==STM32 output configuration== 
 - [x] USB connector 
 	- [ ] Power MCU over USB without batteries? 
-- [ ] CANBUS connector 
-- [ ] Encoder connector 
+- [x] CANBUS connector 
+- [x] Encoder connector 
 	- [ ] Hall-effect sensor connector? 
 - [ ] Double check DRV schematic 
 
@@ -65,9 +65,12 @@ The following is a list of key components and the reasons they were chosen:
 `Reasons:` very similar feature set to the stm32f446ret6 in the nucleo-f446re used for [[FOC]] program development but unlike the f446, the f405 is more widely stocked and therefore available for order both individually and through SMD-assembly services at PCB prototype facilities. 
 
 `Component:` PSU for MCU
-Low Dropout Regulator vs Switched DC-DC converter
+<u>Switched DC-DC converter for power from batteries</u>
 `Part chosen:` integrated LM5008A inside DRV8353RS gate driver
 `Reasons:` reduces PCB footprint and complexity.  
+<u>Low Dropout Regulator for power from USB</u>
+`Part chosen:` Advanced Monolithic Systems AMS1117-3.3
+`Reasons:` Small footprint, simple, power efficiency not a concern over USB, cheap, very well stocked. 
 
 `Component:` 3.3V Fuse 
 `Part chosen:`  BOURNS MF-MSMF010-2
@@ -106,6 +109,14 @@ These optional integrated additional features removing the need for additional I
 `Part chosen:` STM USBLC6-2SC6
 `Reasons:` Designed specifically for USB ESD protection, very well stocked. 
 
+`Component:` CAN Bus transceiver 
+`Part chosen:` Maxim Integrated MAX33041EASA+
+`Reasons:` Small SOIC-8 package, 3.3V, in stock. 
+
+
+`Component:` 
+`Part chosen:` 
+`Reasons:` 
 
 `Component:` 
 `Part chosen:` 
