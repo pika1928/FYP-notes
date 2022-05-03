@@ -17,6 +17,9 @@ The FOC program that such an ESC would run is detailed in [[FOC#Implementation]]
 ### Power source
 #### MCU
 Requires 3.3V, regulated either from the batteries/PSU supply the motor or from the USB port when a source is connected. 
+[StackExchange on dual PSUs](https://electronics.stackexchange.com/a/549083)
+[StackExchange on PSU reverse polarity protection using PMOS](https://electronics.stackexchange.com/a/552386)
+[Infineon Application Note on reverse polarity protection inc PMOS](https://www.infineon.com/dgdl/Reverse-Batery-Protection-Rev2.pdf?fileId=db3a304412b407950112b41887722615#:~:text=To%20lower%20the%20power%20losses,intrinsic%20anti%20parallel%20body%20diode.)
 
 ##### Switching Buck Regulator from batteries
 LM5008A switching buck regulator integrated inside [[DRV8353RS]] gate driver.
@@ -89,6 +92,43 @@ trace copper weight (trace tinning?)
 #### STM32 pinout
 Configured using CubeMX in CubeIDE:
 ![[esc-stm32-pinout.png]]
+#### Reasons for port pin choices: 
+##### USB FS
+Full Speed (12Mbps / USB2.0) enabled as in [[STM32#USB 1 0 Full Speed 12Mbps]]. 
+Don't need to use USB HS and don't want to because of the extra hassle involved with the higher speed transmission: EMI in traces and USB3.0 protocol negotiation. 
+==Uses PA11 and PA12.== 
+##### CAN bus
+CAN2 used since CAN1 conflicts with USB FS - 
+==Uses PB5 and PB6 + PB7 assigned GPIO Output for the CAN Transceiver SHutDowN pin.== 
+##### Sys Debug / JTAG
+Full JTAG extra functionality not necessary and uses 2 additional pins, just `Trace Asynchronous Sw` debug. 
+==Uses PA13, PA14 and PB3.==
+##### SPI1 
+SPI1 used since:
+SPI2 conflicts with ADC3 used for feedback resistor sensing / TIM1 PWM output for gate switching, 
+SPI3 conflicts with Sys Debug. 
+==Uses PA5, PA6 and PA7 + PA4 for DRV chip-select pin.== 
+##### ADC1, 2 & 3
+ADC1, 2 & 3 used so that phase currents can be simultaneously sampled.
+Channels 11, 12 & 13 used to group all 3 pins together.
+==Uses PC1, PC2 and PC3.== 
+##### TIM1 CH1,2,3 & 1N,2N,3N
+TIM1 used to generate centre-aligned PWM signals for all three phases. 
+TIM8 is the only other advanced timer that can support complementary output - useful for 6-PWM mode where a PWM signal is provided for each switch gate in the three half-bridges - but TIM8 Channel1 conflicts with SP1. 
+==Uses PA8, PA9 and PA10 for high-side gate PWMs and PB13, PB14 and PB15 for complementary low-side gate PWMs.== 
+##### I2C1
+I2C1 used with secondary output pins since default pins conflict with CAN2.
+==Uses PB8 and PB9.== 
+##### USART3 
+USART used instead of UART to optionally support Synchronous as well as Asynchronous mode. 
+USART3 chosen for favourable position along same chip edge as CAN2, I2C1 and Sys Debug. 
+==Uses PC10, PC11 and PC12.== 
+
+#### Reasons for GPIO pin choices
+##### DRV ENABLE and nFAULT
+located around SPI port to mirror pin breakout on DRV chip.
+##### Status LED
+
 
 #### USB
 [Dubious Creations article tutorial on implementing USB C 2.0](https://dubiouscreations.com/2021/04/06/designing-with-usb-c-lessons-learned/) 
@@ -107,5 +147,5 @@ Stack-up:    Signal - GND - GND - Signal
 GND between signal layers reduces coupling fields & therefore crosstalk.
 Adjacent GND vias by signal vias to provide minimal signal-loop area. 
 
-Power layers close to HF ICs to minimise parasitic inductance (aka better opwer delivery).
+Power layers close to HF ICs to minimise parasitic inductance (aka better power delivery).
 Stich equi-potential layers (ie GND layers) together often. 

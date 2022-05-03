@@ -113,6 +113,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 ```
 
 ---
+### Timers as PWM generators
+[STM youtube tutorial on PWM, complementary outputs and deadtime insertion.](https://youtu.be/rDaC2N-33Oo) 
+
+---
 ## Peripheral connections
 ---
 ### SPI 
@@ -182,7 +186,7 @@ Then in **Middleware > USB_DEVICE**, a USB class can be configured such as `Comm
 #### USB 2.0 "High Speed" 480Mbps
 
 ---
-### CANBUS
+### CAN bus
 2.0A and B up to 1Mbps
 Requires external CAN transceiver to modulate signals from 0-3.3V to CANL/CANH that go from 0-VCC/2 and VCC/2-VCC. 
 

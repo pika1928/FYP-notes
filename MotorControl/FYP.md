@@ -14,11 +14,13 @@ Title: EV Motor Control using FreeRTOS on an Embedded CPU
 - [x] DRV8353 schematic wiring 
 - [x] ==STM32 output configuration== 
 - [x] USB connector 
-	- [ ] Power MCU over USB without batteries? 
+	- [x] Power MCU over USB without batteries? 
 - [x] CANBUS connector 
 - [x] Encoder connector 
-	- [ ] Hall-effect sensor connector? 
+	- [ ] ~~Hall-effect sensor connector?~~ 
+- [x] Output pads/holes/terminals for motor phase connections
 - [ ] Double check DRV schematic 
+	- [ ] VREF reference voltage for current sense 
 
 - [ ] MOSFET selection 
 - [ ] feedback resistor selection 
@@ -99,7 +101,7 @@ The following is a list of key components and the reasons they were chosen:
 `Component:` Gate driver for MOSFETs
 `Part chosen:` Texas Instruments [[DRV8353RS]]
 `Reasons:` The TI drv835x is a MOSFET gate driver aimed at 3-phase motor control applications. It can be spec'd to include three current shunt amplifiers (drv835**3**rs) to measure the current on each phase as well as to include a DC-DC buck converter (drv8353**r**s) that can source 350mA @ 2.5-75V, ideal for powering the MCU.
-These optional integrated additional features removing the need for additional ICs and circuitry, greatly reduce the complexity of the ESC PCB design. This decreases the time necessary for design, validation and testing and increasing the likelihood of success. 
+These optional integrated additional features remove the need for additional ICs and circuitry, greatly reducing the complexity of the ESC PCB design. This decreases the time necessary for design, validation and testing and increasing the likelihood of success. 
 
 `Component:` USB C receptacle
 `Part chosen:`  Korean Hroparts Elec TYPE-C-31-M-12
@@ -114,9 +116,9 @@ These optional integrated additional features removing the need for additional I
 `Reasons:` Small SOIC-8 package, 3.3V, in stock. 
 
 
-`Component:` 
+`Component:`  Vgs protection diodes
 `Part chosen:` 
-`Reasons:` 
+`Reasons:` LL-34 package is aka Mini-MELF: [KiCad forum](https://forum.kicad.info/t/ll-34-footprint/13146/2). 
 
 `Component:` 
 `Part chosen:` 
