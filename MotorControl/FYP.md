@@ -10,6 +10,31 @@ Title: EV Motor Control using FreeRTOS on an Embedded CPU
 
 
 ## To Do
+##### Report
+- [x] Abstract
+- [x] Table of Contents
+- [x] Table of Acronyms
+- [x] Introduction
+	- [x] Context
+		- [x] repeated work
+		- [x] manifestation in motor control systems (FOC)
+		- [x] portability & performance (RTOSs)
+		- [x] background assumption: motors
+	- [x] Theory
+		- [x] 3-phase motors
+		- [x] FOC
+		- [x] SVM
+	- [x] Literature review
+	- [x] Project aims
+	- [x] Analysis techniques and tools
+- [x] Method & results
+	- [x] FOC for PMSMs
+	- [x] FOC on FreeRTOS
+	- [x] EV powertrain
+	- [x] ESC
+- [x] Discussion & conclusion
+- [x] References
+
 ##### ESC PCB
 - [x] DRV8353 schematic wiring 
 - [x] ==STM32 output configuration== 
@@ -20,13 +45,13 @@ Title: EV Motor Control using FreeRTOS on an Embedded CPU
 	- [ ] ~~Hall-effect sensor connector?~~ 
 - [x] Output pads/holes/terminals for motor phase connections
 - [ ] Double check DRV schematic 
-	- [ ] VREF reference voltage for current sense 
+	- [x] VREF reference voltage for current sense 
 
-- [ ] MOSFET selection 
-- [ ] feedback resistor selection 
-- [ ] LM5008A component selection 
-- [ ] DRV8353 component selection 
-- [ ] Remaining components selection 
+- [x] MOSFET selection 
+- [x] feedback resistor selection 
+- [x] LM5008A component selection 
+- [x] DRV8353 component selection 
+- [x] Remaining components selection 
 - [ ] PCB layout 
 - [ ] PCB order file generation 
 - [ ] PCB file checking 
@@ -41,7 +66,7 @@ Title: EV Motor Control using FreeRTOS on an Embedded CPU
 
 ---
 ## Portable [[FreeRTOS]] [[FOC]] program
----
+
 Developed using an [[stm32]] nucleo-f446re development board and the STM32CubeIDE.
 
 ### Program structure
@@ -53,7 +78,7 @@ The FOC algorithm part of the program will be implemented using Space Vector Mod
 
 ---
 ## Example [[ESC]] PCB
----
+
 The model-scale example PCB will aim to deliver power on a level suitable for hobby RC vehicles (such as RC cars) or hobby e-vehicles (such as e-bikes, e-scooters, e-skateboards).
 This will hopefully serve as a safe, low-power analogy for EVs. 
 ![[ESC#FYP Model-scale ESC]]
@@ -101,7 +126,7 @@ The following is a list of key components and the reasons they were chosen:
 `Component:` Gate driver for MOSFETs
 `Part chosen:` Texas Instruments [[DRV8353RS]]
 `Reasons:` The TI drv835x is a MOSFET gate driver aimed at 3-phase motor control applications. It can be spec'd to include three current shunt amplifiers (drv835**3**rs) to measure the current on each phase as well as to include a DC-DC buck converter (drv8353**r**s) that can source 350mA @ 2.5-75V, ideal for powering the MCU.
-These optional integrated additional features remove the need for additional ICs and circuitry, greatly reducing the complexity of the ESC PCB design. This decreases the time necessary for design, validation and testing and increasing the likelihood of success. 
+These optional integrated additional features remove the need for additional ICs and circuitry, greatly reducing the complexity of the ESC PCB design. This decreases the time necessary for design, validation and testing and increases the likelihood of success. 
 
 `Component:` USB C receptacle
 `Part chosen:`  Korean Hroparts Elec TYPE-C-31-M-12

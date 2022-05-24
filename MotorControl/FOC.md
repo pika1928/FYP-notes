@@ -1,6 +1,4 @@
 # FOC
-Table of Contents
-
 
 ## Field Oriented Control
 The Field Oriented Control scheme keeps the magnetic field of the stator 90° ahead of the rotor's magnetic field. 
@@ -74,6 +72,10 @@ iD and iQ components of the same vector:
 ### Space Vector Modulation
 [This MathWorks page](https://uk.mathworks.com/solutions/power-electronics-control/space-vector-modulation.html?s_eid=PSM_15028) gives an overview of what a SVM implementation includes. 
 [This video](https://youtu.be/oHEVdXucSJs?t=445) from Jantzen Lee explains concisely how to go from inputs to outputs. It is based upon [this lecture](https://www.youtube.com/watch?v=5eQyoVMz1dY&t=767s) from TI which includes a bit more information.
+![[foc-svm-pwm-duty-cycles.png]]
+![[foc-svm-pwm-t012-to-tabc.png]]
+![[foc-svm-pwm-centre-aligned-outputs.png]]
+
 
 ### Observer algorithms for sensor-less position and velocity
 Observers are closed loop controllers (error tracking integrators/eliminators) that also make use of a feed-forward loop to estimate the position/velocity/acceleration of a system by observing it's current position and it's commanded position. 

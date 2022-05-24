@@ -1,6 +1,66 @@
 {
   "recentFiles": [
     {
+      "basename": "ESC",
+      "path": "MotorControl/ESC.md"
+    },
+    {
+      "basename": "2022-03-24",
+      "path": "Dailys/2022-03-24.md"
+    },
+    {
+      "basename": "2022-05-05",
+      "path": "Dailys/2022-05-05.md"
+    },
+    {
+      "basename": "FYP",
+      "path": "MotorControl/FYP.md"
+    },
+    {
+      "basename": "FOC",
+      "path": "MotorControl/FOC.md"
+    },
+    {
+      "basename": "STM32",
+      "path": "MotorControl/STM32.md"
+    },
+    {
+      "basename": "DMA",
+      "path": "MotorControl/DMA.md"
+    },
+    {
+      "basename": "FreeRTOS",
+      "path": "MotorControl/FreeRTOS.md"
+    },
+    {
+      "basename": "foc-svm-pwm-duty-cycles",
+      "path": "MotorControl/foc-svm-pwm-duty-cycles.png"
+    },
+    {
+      "basename": "foc-svm-basic-vector-abc-formation",
+      "path": "MotorControl/foc-svm-basic-vector-abc-formation.png"
+    },
+    {
+      "basename": "foc-svm-basic-vector-abc-components",
+      "path": "MotorControl/foc-svm-basic-vector-abc-components.png"
+    },
+    {
+      "basename": "DRV8353RS",
+      "path": "MotorControl/DRV8353RS.md"
+    },
+    {
+      "basename": "stm32f4-hal-and-ll-drivers-documentation",
+      "path": "MotorControl/stm32f4-hal-and-ll-drivers-documentation.pdf"
+    },
+    {
+      "basename": "foc-implementation-block-diagram",
+      "path": "MotorControl/foc-implementation-block-diagram.png"
+    },
+    {
+      "basename": "2022-05-04",
+      "path": "Dailys/2022-05-04.md"
+    },
+    {
       "basename": "2022-05-03",
       "path": "Dailys/2022-05-03.md"
     },
@@ -9,24 +69,8 @@
       "path": "Dailys/2022-04-27.md"
     },
     {
-      "basename": "FYP",
-      "path": "MotorControl/FYP.md"
-    },
-    {
-      "basename": "ESC",
-      "path": "MotorControl/ESC.md"
-    },
-    {
-      "basename": "STM32",
-      "path": "MotorControl/STM32.md"
-    },
-    {
       "basename": "2022-04-26",
       "path": "Dailys/2022-04-26.md"
-    },
-    {
-      "basename": "FreeRTOS",
-      "path": "MotorControl/FreeRTOS.md"
     },
     {
       "basename": "2022-04-25",
@@ -37,52 +81,16 @@
       "path": "Dailys/2022-04-24.md"
     },
     {
-      "basename": "FOC",
-      "path": "MotorControl/FOC.md"
-    },
-    {
       "basename": "2022-04-21",
       "path": "Dailys/2022-04-21.md"
-    },
-    {
-      "basename": "2022-03-28",
-      "path": "Dailys/2022-03-28.md"
-    },
-    {
-      "basename": "2022-03-24",
-      "path": "Dailys/2022-03-24.md"
-    },
-    {
-      "basename": "2022-03-30",
-      "path": "Dailys/2022-03-30.md"
-    },
-    {
-      "basename": "DMA",
-      "path": "MotorControl/DMA.md"
-    },
-    {
-      "basename": "DRV8353RS",
-      "path": "MotorControl/DRV8353RS.md"
     },
     {
       "basename": "2022-04-20",
       "path": "Dailys/2022-04-20.md"
     },
     {
-      "basename": "2022-04-20-pcb-progress",
-      "path": "Dailys/2022-04-20-pcb-progress.png"
-    },
-    {
       "basename": "2022-04-19",
       "path": "Dailys/2022-04-19.md"
-    },
-    {
-      "basename": "2022-04-19-pcb-progress",
-      "path": "Dailys/2022-04-19-pcb-progress.png"
-    },
-    {
-      "basename": "2022-04-04",
-      "path": "Dailys/2022-04-04.md"
     },
     {
       "basename": "2022-04-16",
@@ -101,16 +109,36 @@
       "path": "Dailys/2022-04-06.md"
     },
     {
+      "basename": "2022-03-31",
+      "path": "Dailys/2022-03-31.md"
+    },
+    {
+      "basename": "2022-03-30",
+      "path": "Dailys/2022-03-30.md"
+    },
+    {
+      "basename": "2022-03-28",
+      "path": "Dailys/2022-03-28.md"
+    },
+    {
+      "basename": "2022-04-20-pcb-progress",
+      "path": "Dailys/2022-04-20-pcb-progress.png"
+    },
+    {
+      "basename": "2022-04-19-pcb-progress",
+      "path": "Dailys/2022-04-19-pcb-progress.png"
+    },
+    {
+      "basename": "2022-04-04",
+      "path": "Dailys/2022-04-04.md"
+    },
+    {
       "basename": "2022-03-25",
       "path": "Dailys/2022-03-25.md"
     },
     {
       "basename": "2022-03-29",
       "path": "Dailys/2022-03-29.md"
-    },
-    {
-      "basename": "2022-03-31",
-      "path": "Dailys/2022-03-31.md"
     },
     {
       "basename": "2022-04-01",
@@ -123,10 +151,6 @@
     {
       "basename": "foc-svm-block-diagram",
       "path": "MotorControl/foc-svm-block-diagram.png"
-    },
-    {
-      "basename": "foc-svm-basic-vector-abc-components",
-      "path": "MotorControl/foc-svm-basic-vector-abc-components.png"
     },
     {
       "basename": "Double Buffer (Ping-pong Buffer)",

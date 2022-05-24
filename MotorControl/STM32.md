@@ -116,6 +116,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 ### Timers as PWM generators
 [STM youtube tutorial on PWM, complementary outputs and deadtime insertion.](https://youtu.be/rDaC2N-33Oo) 
 
+
 ---
 ## Peripheral connections
 ---
